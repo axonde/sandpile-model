@@ -1,7 +1,9 @@
+#include <cstdint>
 #include <iostream>
-#include "deque/deque.h"
+// #include "deque/deque.h"
 #include "parser/parser.h"
 #include "utility/utility.h"
+#include "vector/vector.h"
 
 int main(int argc, char** argv) {
     Args args = Parse(argc, argv);
@@ -13,28 +15,14 @@ int main(int argc, char** argv) {
     std::cout << "Good!" << '\n';
     PrintArgs(args);
 
-    Deque<int> deq;
-    deq.push_front(12);
-    deq.push_front(2);
-    deq.push_front(52);
-    deq.push_front(1);
-    Deque<int> deq2(3);
-    deq.pop_head();
-
-    Deque<Deque<int>> deq_special;
-    deq_special.push_front(deq);
-    deq_special.push_front(deq);
-
-    deq_special.push_front(deq);
-
-    std::cout << "ПЕЧАТЬ" << '\n';
-    std::cout << deq << '\n';
-    std::cout << "next" << '\n';
-    std::cout << deq2 << '\n';
-    std::cout << "next" << '\n';
-    std::cout << deq_special << '\n';
-
-    std::cout << "ЧИСТКА" << '\n';
+    // Vector<Vector<uint64_t>> v(1e8);
+    // // v.push_front(Vector<uint64_t>(100));
+    // // v[0].push_back(12324324);
+    // // v[0][0] = 126;
+    // // std::cout << v[0][0] << '\n';
+    // for (int i = 0; i != 1e7; ++i) {
+    //     v.push_back(Vector<uint64_t>());
+    // }
 
     return 0;
 }

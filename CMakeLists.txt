@@ -9,9 +9,10 @@ project(
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_subdirectory(deque)
+# add_subdirectory(deque)
 add_subdirectory(parser)
 add_subdirectory(utility)
+add_subdirectory(vector)
 add_subdirectory(bin)
 
 # enable_testing()
