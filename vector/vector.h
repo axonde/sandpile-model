@@ -30,28 +30,41 @@ private:
             T* to_delete = vector;
             _capacity *= 2;
             vector = new T[_capacity];
-            for (size_t i = 0; i != _end - _begin; ++i) {
+            for (size_t i = _begin; i != _end; ++i) {
                 vector[i] = to_delete[i];
             }
             delete[] to_delete;
         }
     }
+
 public:
-    size_t begin() const;
-    size_t end() const;
-    size_t capacity() const;
     size_t size() const;
 
     T& operator [] (size_t i) const {
         if (_begin + i >= _end) {
-            std::cerr << _begin + i << ' ' << _end << '\n';
+            std::cerr << "log error: " << _begin + i << ' ' << _end << '\n';
             throw std::out_of_range("index error");
         }
         return vector[_begin + i];
     }
 
+    size_t begin() const;
+    size_t end() const;
+    size_t capacity() const;
+
     Vector() = default;
     Vector(size_t n);
+
+    Vector& operator = (const Vector& v) {
+        _capacity = v.capacity();
+        vector = new T[_capacity];
+        _begin = v.begin();
+        _end = v.end();
+        for (size_t i = _begin; i != _end; ++i) {
+            vector[i] = v[i - _begin];
+        }
+        return *this;
+    }
 
     bool empty() const;
 
@@ -72,18 +85,13 @@ Vector<T>::Vector(size_t n) {
 }
 
 template <typename T>
-size_t Vector<T>::capacity() const {
-    return _capacity;
-}
-
-template <typename T>
-size_t Vector<T>::size() const {
-    return _end - _begin;
-}
-
-template <typename T>
 size_t Vector<T>::begin() const {
     return _begin;
+}
+
+template <typename T>
+size_t Vector<T>::capacity() const {
+    return _capacity;
 }
 
 template <typename T>
@@ -106,6 +114,11 @@ Vector<T>& Vector<T>::push_front(const T& value) {
 template <typename T>
 Vector<T>& Vector<T>::push_back(const T& value) {
     this->allocate();
-    vector[_end++] = value; 
+    vector[_end++] = value;
     return *this;
+}
+
+template <typename T>
+size_t Vector<T>::size() const {
+    return _end - _begin;
 }

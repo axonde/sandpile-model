@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
     std::cout << "x y piles" << '\n';
     for (int i = 0; i != sandpile.size(); ++i) {
         for (int j = 0; j != sandpile[i].size(); ++j) {
-            std::cout << sandpile[i][j].x << ' ' << sandpile[i][j].y << ' ' << sandpile[i][j].piles << '\n';
+            std::cout << j << ' ' << i << ' ' << sandpile[i][j].piles << '\n';
         }
     }
 
