@@ -1,7 +1,6 @@
 #pragma once
 #include <cstdint>
 #include <cstddef>
-#include <iostream>
 #include <stdexcept>
 
 template <typename T>
@@ -60,7 +59,6 @@ public:
 
     ~Vector() {
         // recursively delete all vectors included.
-        std::cout << "delete this -> " << vector << ' ' << this->begin() << ' ' << this->end() << ' ' << this->capacity() << '\n';
         delete[] vector;
     }
 };
@@ -68,7 +66,8 @@ public:
 template <typename T>
 Vector<T>::Vector(size_t n) {
     _capacity = n;
-    T* vector = new T[n];
+    vector = new T[n];
+    _end = n;
 }
 
 template <typename T>

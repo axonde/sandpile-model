@@ -15,7 +15,22 @@ int main(int argc, char** argv) {
     std::cout << "Good!" << '\n';
     PrintArgs(args);
 
-    // Vector<Vector<uint64_t>> v(1e8);
+    Vector<Vector<uint64_t>> v(3);
+    v[0].push_back(1);
+    v[0].push_back(2);
+    v[0].push_back(3);
+    v[1].push_back(4);
+    v[1].push_back(5);
+    v[1].push_back(6);
+    v[2].push_back(7);
+    v[2].push_back(8);
+    v[2].push_back(9);
+    for (int i = 0; i != 3; ++i) {
+        for (int j = 0; j != 3; ++j) {
+            std::cout << v[i][j] << ' ';
+        }
+        std::cout << '\n';
+    }
     // // v.push_front(Vector<uint64_t>(100));
     // // v[0].push_back(12324324);
     // // v[0][0] = 126;
