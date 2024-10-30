@@ -40,6 +40,7 @@ public:
     size_t begin() const;
     size_t end() const;
     size_t capacity() const;
+    size_t size() const;
 
     T& operator [] (size_t i) const {
         if (_begin + i >= _end) {
@@ -73,6 +74,11 @@ Vector<T>::Vector(size_t n) {
 template <typename T>
 size_t Vector<T>::capacity() const {
     return _capacity;
+}
+
+template <typename T>
+size_t Vector<T>::size() const {
+    return _end - _begin;
 }
 
 template <typename T>

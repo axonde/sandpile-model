@@ -33,6 +33,7 @@
 
 # Project locals
 build/
+tests/
 
 # IDE
 .vscode/

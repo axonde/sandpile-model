@@ -1,7 +1,12 @@
 #pragma once
 #include <cstddef>
-#include <string>
+#include <cstdint>
+#include <cstddef>
 #include <iostream>
+#include <fstream>
+#include <string>
+#include "../sandpile/sandpile.h"
+#include "../vector/vector.h"
 
 struct Args {
     std::string input_path;
@@ -12,3 +17,5 @@ struct Args {
 };
 
 Args Parse(int argc, char** argv);
+
+Vector<Vector<Pixel>> Read(const std::string& filepath);

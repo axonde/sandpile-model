@@ -41,3 +41,49 @@ Args Parse(int argc, char** argv) {
     args.is_correct = true;
     return args;
 }
+
+Vector<Vector<Pixel>> Read(const std::string& filepath) {
+    std::ifstream input(filepath, std::ios::in);
+    if (!input.is_open()) {
+        return Vector<Vector<Pixel>>();
+    }
+    int64_t x, y;
+    uint64_t piles;
+    int64_t min_x, min_y, max_x, max_y;
+    input >> min_x >> min_y >> piles;
+    max_x = min_x;
+    max_y = min_y;
+    while (input >> x >> y >> piles) {
+        if (x < min_x) {
+            min_x = x;
+        }
+        if (x > max_x) {
+            max_x = x;
+        }
+        if (y < min_y) {
+            min_y = y;
+        }
+        if (y > max_y) {
+            max_y = y;
+        }
+    }
+
+    Vector<Vector<Pixel>> vector;
+    for (size_t y = min_y; y != max_y + 1; ++y) {
+        vector.push_back(Vector<Pixel>());
+        for (size_t x = min_x; x != max_x + 1; ++x) {
+            vector[y - min_y].push_back(Pixel());
+        }
+    }
+
+    input.clear();
+    input.seekg(0, input.beg);
+
+    while (input >> x >> y >> piles) {
+        vector[y - min_y][x - min_x].x = x;
+        vector[y - min_y][x - min_x].y = y;
+        vector[y - min_y][x - min_x].piles = piles;
+    }
+
+    return vector;
+}

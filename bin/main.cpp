@@ -2,6 +2,7 @@
 #include <iostream>
 // #include "deque/deque.h"
 #include "parser/parser.h"
+#include "sandpile/sandpile.h"
 #include "utility/utility.h"
 #include "vector/vector.h"
 
@@ -12,32 +13,20 @@ int main(int argc, char** argv) {
         PrintUsage();
         return 1;
     }
-    std::cout << "Good!" << '\n';
     PrintArgs(args);
 
-    Vector<Vector<uint64_t>> v(3);
-    v[0].push_back(1);
-    v[0].push_back(2);
-    v[0].push_back(3);
-    v[1].push_back(4);
-    v[1].push_back(5);
-    v[1].push_back(6);
-    v[2].push_back(7);
-    v[2].push_back(8);
-    v[2].push_back(9);
-    for (int i = 0; i != 3; ++i) {
-        for (int j = 0; j != 3; ++j) {
-            std::cout << v[i][j] << ' ';
-        }
-        std::cout << '\n';
+    Vector<Vector<Pixel>> sandpile = Read(args.input_path);
+    if (sandpile.empty()) {
+        std::cerr << "Error while parsing .tsv input file. Please retry." << '\n';
+        return 1;
     }
-    // // v.push_front(Vector<uint64_t>(100));
-    // // v[0].push_back(12324324);
-    // // v[0][0] = 126;
-    // // std::cout << v[0][0] << '\n';
-    // for (int i = 0; i != 1e7; ++i) {
-    //     v.push_back(Vector<uint64_t>());
-    // }
+
+    std::cout << "x y piles" << '\n';
+    for (int i = 0; i != sandpile.size(); ++i) {
+        for (int j = 0; j != sandpile[i].size(); ++j) {
+            std::cout << sandpile[i][j].x << ' ' << sandpile[i][j].y << ' ' << sandpile[i][j].piles << '\n';
+        }
+    }
 
     return 0;
 }
