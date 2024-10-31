@@ -28,5 +28,24 @@ int main(int argc, char** argv) {
         }
     }
 
+    Collapse(sandpile, 1, 1);
+
+    std::cout << "x y piles" << '\n';
+    for (int i = 0; i != sandpile.size(); ++i) {
+        for (int j = 0; j != sandpile[i].size(); ++j) {
+            std::cout << j << ' ' << i << ' ' << sandpile[i][j].piles << '\n';
+        }
+    }
+
+    Collapse(sandpile, 2, 1);
+
+    std::cout << "x y piles" << '\n';
+    for (int i = 0; i != sandpile.size(); ++i) {
+        for (int j = 0; j != sandpile[i].size(); ++j) {
+            std::cout << j << ' ' << i << ' ' << sandpile[i][j].piles << '\n';
+        }
+    }
+
+
     return 0;
 }

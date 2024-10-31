@@ -73,17 +73,13 @@ Vector<Vector<Pixel>> Read(const std::string& filepath) {
         vector.push_back(Vector<Pixel>());
         for (size_t x = min_x; x != max_x + 1; ++x) {
             vector[y - min_y].push_back(Pixel());
-            std::cout << y - min_y << ' ' << vector[y - min_y].size() << '\n';
         }
     }
 
     input.clear();
     input.seekg(0, input.beg);
 
-    std::cout << "acht " << vector.size() << ' ' << vector[1].size() << '\n';
-
     while (input >> x >> y >> piles) {
-        std::cout << x << ' ' << y << '\n';
         vector[y - min_y][x - min_x].piles = piles;
     }
 

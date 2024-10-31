@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <cstddef>
+#include <iostream>
 #include <stdexcept>
 
 template <typename T>
@@ -38,11 +39,10 @@ private:
     }
 
 public:
-    size_t size() const;
-
     T& operator [] (size_t i) const {
         if (_begin + i >= _end) {
             std::cerr << "log error: " << _begin + i << ' ' << _end << '\n';
+            std::cout << "\e[35muse function .at() to check cell's owning to vector\e[0m" << '\n';
             throw std::out_of_range("index error");
         }
         return vector[_begin + i];
@@ -66,7 +66,9 @@ public:
         return *this;
     }
 
+    size_t size() const;
     bool empty() const;
+    bool at(size_t i) const;
 
     Vector& push_front(const T& _value);
     Vector& push_back(const T& _value);
@@ -102,6 +104,14 @@ size_t Vector<T>::end() const {
 template <typename T>
 bool Vector<T>::empty() const {
     return _begin == _end;
+}
+
+template <typename T>
+bool Vector<T>::at(size_t i) const {
+    if (i >= 0 && i < _end - _begin) {
+        return true;
+    }
+    return false;
 }
 
 template <typename T>

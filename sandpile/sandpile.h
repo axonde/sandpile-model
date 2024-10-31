@@ -1,5 +1,7 @@
 #pragma once
 #include <cstdint>
+#include <cstddef>
+#include "../vector/vector.h"
 
 struct Pixel {
     uint64_t piles = 0;
@@ -10,3 +12,5 @@ struct Pixel {
 
     Pixel() = default;
 };
+
+void Collapse(Vector<Vector<Pixel>>& matrix, size_t x, size_t y);
