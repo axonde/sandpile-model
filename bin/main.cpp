@@ -15,34 +15,28 @@ int main(int argc, char** argv) {
     }
     PrintArgs(args);
 
-    Vector<Vector<Pixel>> sandpile = Read(args.input_path);
-    if (sandpile.empty()) {
+    Sandpile sandpile;
+
+    sandpile = Read(args.input_path);
+    if (sandpile.matrix.empty()) {
         std::cerr << "Error while parsing .tsv input file. Please retry." << '\n';
         return 1;
     }
 
     std::cout << "x y piles" << '\n';
-    for (int i = 0; i != sandpile.size(); ++i) {
-        for (int j = 0; j != sandpile[i].size(); ++j) {
-            std::cout << j << ' ' << i << ' ' << sandpile[i][j].piles << '\n';
+    for (int i = 0; i != sandpile.matrix.size(); ++i) {
+        for (int j = 0; j != sandpile.matrix[i].size(); ++j) {
+            std::cout << j << ' ' << i << ' ' << sandpile.matrix[i][j].piles << '\n';
         }
     }
 
-    Collapse(sandpile, 1, 1);
+    Shake(sandpile, args.max_iter, args.freq);
 
+    std::cout << "after shaking >> " << '\n';
     std::cout << "x y piles" << '\n';
-    for (int i = 0; i != sandpile.size(); ++i) {
-        for (int j = 0; j != sandpile[i].size(); ++j) {
-            std::cout << j << ' ' << i << ' ' << sandpile[i][j].piles << '\n';
-        }
-    }
-
-    Collapse(sandpile, 2, 1);
-
-    std::cout << "x y piles" << '\n';
-    for (int i = 0; i != sandpile.size(); ++i) {
-        for (int j = 0; j != sandpile[i].size(); ++j) {
-            std::cout << j << ' ' << i << ' ' << sandpile[i][j].piles << '\n';
+    for (int i = 0; i != sandpile.matrix.size(); ++i) {
+        for (int j = 0; j != sandpile.matrix[i].size(); ++j) {
+            std::cout << j << ' ' << i << ' ' << sandpile.matrix[i][j].piles << '\n';
         }
     }
 

@@ -18,4 +18,4 @@ struct Args {
 
 Args Parse(int argc, char** argv);
 
-Vector<Vector<Pixel>> Read(const std::string& filepath);
+Sandpile Read(const std::string& filepath);

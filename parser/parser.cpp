@@ -42,15 +42,19 @@ Args Parse(int argc, char** argv) {
     return args;
 }
 
-Vector<Vector<Pixel>> Read(const std::string& filepath) {
+Sandpile Read(const std::string& filepath) {
     std::ifstream input(filepath, std::ios::in);
     if (!input.is_open()) {
-        return Vector<Vector<Pixel>>();
+        return Sandpile();
     }
+    Sandpile sandpile;
     int64_t x, y;
     uint64_t piles;
     int64_t min_x, min_y, max_x, max_y;
     input >> min_x >> min_y >> piles;
+    if (piles > 3) {
+        sandpile.unstables += 1;
+    }
     max_x = min_x;
     max_y = min_y;
     while (input >> x >> y >> piles) {
@@ -66,13 +70,15 @@ Vector<Vector<Pixel>> Read(const std::string& filepath) {
         if (y > max_y) {
             max_y = y;
         }
+        if (piles > 3) {
+            sandpile.unstables += 1;
+        }
     }
 
-    Vector<Vector<Pixel>> vector;
     for (size_t y = min_y; y != max_y + 1; ++y) {
-        vector.push_back(Vector<Pixel>());
+        sandpile.matrix.push_back(Vector<Pixel>());
         for (size_t x = min_x; x != max_x + 1; ++x) {
-            vector[y - min_y].push_back(Pixel());
+            sandpile.matrix[y - min_y].push_back(Pixel());
         }
     }
 
@@ -80,8 +86,8 @@ Vector<Vector<Pixel>> Read(const std::string& filepath) {
     input.seekg(0, input.beg);
 
     while (input >> x >> y >> piles) {
-        vector[y - min_y][x - min_x].piles = piles;
+        sandpile.matrix[y - min_y][x - min_x].piles = piles;
     }
 
-    return vector;
+    return sandpile;
 }

@@ -13,4 +13,21 @@ struct Pixel {
     Pixel() = default;
 };
 
-void Collapse(Vector<Vector<Pixel>>& matrix, size_t x, size_t y);
+struct Sandpile {
+    uint64_t unstables = 0;
+    Vector<Vector<Pixel>> matrix;
+
+    bool is_stable() {
+        return unstables == 0;
+    }
+
+    void add_unstables(size_t i, size_t j) {
+        if (matrix[i][j].piles == 4) {
+            ++unstables;
+        }
+    }
+};
+
+bool Collapse(Sandpile& sandpile, size_t i, size_t j);
+
+void Shake(Sandpile& sandpile, size_t max_iter, size_t freq);
