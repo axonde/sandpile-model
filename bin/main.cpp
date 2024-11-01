@@ -1,10 +1,10 @@
 #include <cstdint>
 #include <iostream>
-// #include "deque/deque.h"
-#include "parser/parser.h"
-#include "sandpile/sandpile.h"
-#include "utility/utility.h"
 #include "vector/vector.h"
+#include "sandpile/sandpile.h"
+#include "parser/parser.h"
+#include "image/image.h"
+#include "utility/utility.h"
 
 int main(int argc, char** argv) {
     Args args = Parse(argc, argv);
@@ -23,23 +23,9 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    std::cout << "x y piles" << '\n';
-    for (int i = 0; i != sandpile.matrix.size(); ++i) {
-        for (int j = 0; j != sandpile.matrix[i].size(); ++j) {
-            std::cout << j << ' ' << i << ' ' << sandpile.matrix[i][j].piles << '\n';
-        }
-    }
+    Shake(sandpile, args);
 
-    Shake(sandpile, args.max_iter, args.freq);
-
-    std::cout << "after shaking >> " << '\n';
-    std::cout << "x y piles" << '\n';
-    for (int i = 0; i != sandpile.matrix.size(); ++i) {
-        for (int j = 0; j != sandpile.matrix[i].size(); ++j) {
-            std::cout << j << ' ' << i << ' ' << sandpile.matrix[i][j].piles << '\n';
-        }
-    }
-
+    Export(sandpile.matrix, args.output_path, "sandpile-output.bmp");
 
     return 0;
 }

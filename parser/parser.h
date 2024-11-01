@@ -5,7 +5,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "../sandpile/sandpile.h"
 #include "../vector/vector.h"
 
 struct Args {
@@ -18,4 +17,5 @@ struct Args {
 
 Args Parse(int argc, char** argv);
 
+#include "../sandpile/sandpile.h"
 Sandpile Read(const std::string& filepath);

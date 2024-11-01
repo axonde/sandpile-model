@@ -9,7 +9,7 @@ project(
 
 set(CMAKE_CXX_STANDARD 20)
 
-# add_subdirectory(deque)
+add_subdirectory(image)
 add_subdirectory(parser)
 add_subdirectory(sandpile)
 add_subdirectory(utility)

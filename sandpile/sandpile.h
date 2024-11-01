@@ -30,4 +30,6 @@ struct Sandpile {
 
 bool Collapse(Sandpile& sandpile, size_t i, size_t j);
 
-void Shake(Sandpile& sandpile, size_t max_iter, size_t freq);
+#include "../image/image.h"
+#include "../parser/parser.h"
+void Shake(Sandpile& sandpile, const Args& args);

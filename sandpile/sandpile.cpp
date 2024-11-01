@@ -10,7 +10,7 @@ bool Collapse(Sandpile& sandpile, size_t i, size_t j) {
     }
 
     matrix[i][j].piles -= 4;
-    sandpile.unstables -= 1;
+    sandpile.unstables -= matrix[i][j].piles < 4 ? 1 : 0;
 
     // top
     if (!matrix.at(i - 1)) {
@@ -49,12 +49,15 @@ bool Collapse(Sandpile& sandpile, size_t i, size_t j) {
     return true;
 }
 
-void Shake(Sandpile& sandpile, size_t max_iter, size_t freq) {
+void Shake(Sandpile& sandpile, const Args& args) {
     size_t i = 0, j = 0, curr_iter = 0;
 
-    while(curr_iter < max_iter && !sandpile.is_stable()) {
+    while((curr_iter < args.max_iter && args.max_iter != 0) || !sandpile.is_stable()) {
         if (Collapse(sandpile, i, j)) {
             ++curr_iter;
+            if (args.freq && curr_iter % args.freq == 0 && args.max_iter - curr_iter != 1) {
+                Export(sandpile.matrix, args.output_path, "sandpile-" + std::to_string(curr_iter) + ".bmp");
+            }
         }
         if (j == sandpile.matrix[0].size() - 1) {
             i = ++i % sandpile.matrix.size();

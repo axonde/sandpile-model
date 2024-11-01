@@ -18,11 +18,11 @@ Args Parse(int argc, char** argv) {
             continue;
         }
         if (arg == "--max-iter" || arg == "-m") {
-            args.max_iter = std::stoi(argv[i++ + 1]);
+            args.max_iter = std::stoll(argv[i++ + 1]);
             continue;
         }
         if (arg == "--freq" || arg == "-f") {
-            args.freq = std::stoi(argv[i++ + 1]);
+            args.freq = std::stoll(argv[i++ + 1]);
             continue;
         }
         return args;
@@ -32,9 +32,6 @@ Args Parse(int argc, char** argv) {
             return args;
         }
         if (args.output_path == "") {
-            return args;
-        }
-        if (args.max_iter < 1) {
             return args;
         }
     }
