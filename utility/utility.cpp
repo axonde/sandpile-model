@@ -1,8 +1,8 @@
 #include "utility.h"
 
 void PrintUsage() {
-    std::cout << "Usage: ./sandpile-model [options][paths... / size...]\n";
-    std::cout << "Options:\n";
+    std::cout << "Usage: ./sandpile-model [parameters][paths... / size...]\n";
+    std::cout << "Parameters:\n";
     std::cout << "  " << "-i --input <.tsv file>" << "\t\t\t" << "input file\n";
     std::cout << "  " << "-o --output <path>" << "\t\t\t\t" << "path to the output directory\n";
     std::cout << "  " << "-m --max-iter <unsigned number>" << "\t\t" << "maximum counts of providing iterations\n";

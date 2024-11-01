@@ -1,6 +1,5 @@
 add_executable(${PROJECT_NAME} main.cpp)
 
-# target_link_libraries(${PROJECT_NAME} PRIVATE deque)
 target_link_libraries(${PROJECT_NAME} PRIVATE image)
 target_link_libraries(${PROJECT_NAME} PRIVATE parser)
 target_link_libraries(${PROJECT_NAME} PRIVATE sandpile)

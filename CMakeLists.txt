@@ -15,6 +15,3 @@ add_subdirectory(sandpile)
 add_subdirectory(utility)
 add_subdirectory(vector)
 add_subdirectory(bin)
-
-# enable_testing()
-# add_subdirectory(tests)

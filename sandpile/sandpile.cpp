@@ -1,8 +1,7 @@
 #include "sandpile.h"
 
 bool Collapse(Sandpile& sandpile, size_t i, size_t j) {
-    // i and j must guaranted be in the matrix -> else index error.
-
+    
     Vector<Vector<Pixel>>& matrix = sandpile.matrix;
 
     if (matrix[i][j].piles < 4) {
@@ -52,7 +51,7 @@ bool Collapse(Sandpile& sandpile, size_t i, size_t j) {
 void Shake(Sandpile& sandpile, const Args& args) {
     size_t i = 0, j = 0, curr_iter = 0;
 
-    while((curr_iter < args.max_iter && args.max_iter != 0) || !sandpile.is_stable()) {
+    while ((curr_iter < args.max_iter && args.max_iter != 0 || args.max_iter == 0) && !sandpile.is_stable()) {
         if (Collapse(sandpile, i, j)) {
             ++curr_iter;
             if (args.freq && curr_iter % args.freq == 0 && args.max_iter - curr_iter != 1) {

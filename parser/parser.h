@@ -2,7 +2,6 @@
 #include <cstddef>
 #include <cstdint>
 #include <cstddef>
-#include <iostream>
 #include <fstream>
 #include <string>
 #include "../vector/vector.h"

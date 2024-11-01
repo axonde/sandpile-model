@@ -41,7 +41,6 @@ private:
 public:
     T& operator [] (size_t i) const {
         if (_begin + i >= _end) {
-            std::cerr << "log error: " << _begin + i << ' ' << _end << '\n';
             std::cout << "\e[35muse function .at() to check cell's owning to vector\e[0m" << '\n';
             throw std::out_of_range("index error");
         }

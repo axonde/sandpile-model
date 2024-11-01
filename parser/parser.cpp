@@ -2,7 +2,7 @@
 
 Args Parse(int argc, char** argv) {
     Args args;
-    if (argc < 7) {
+    if (argc < 9) {
         return args;
     }
 
@@ -41,17 +41,21 @@ Args Parse(int argc, char** argv) {
 
 Sandpile Read(const std::string& filepath) {
     std::ifstream input(filepath, std::ios::in);
+    
     if (!input.is_open()) {
         return Sandpile();
     }
+
     Sandpile sandpile;
     int64_t x, y;
     uint64_t piles;
     int64_t min_x, min_y, max_x, max_y;
+
     input >> min_x >> min_y >> piles;
     if (piles > 3) {
         sandpile.unstables += 1;
     }
+
     max_x = min_x;
     max_y = min_y;
     while (input >> x >> y >> piles) {

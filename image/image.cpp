@@ -8,8 +8,8 @@ Color::Color(float _r, float _g, float _b) {
 
 void Export(const Vector<Vector<Pixel>>& matrix, const std::string& _path, const std::string& filename) {
     /*
-    @_path - current path to output directory
-    @filename - name of file, which is going to be created
+        @_path - current path to output directory
+        @filename - name of file, which is going to be created
     */
 
     std::filesystem::path path{_path};
@@ -40,6 +40,7 @@ void Export(const Vector<Vector<Pixel>>& matrix, const std::string& _path, const
     const int fileHeaderSize = 14;
     const int informationHeaderSize = 40;
     const int fileSize = fileHeaderSize + informationHeaderSize + colorsPaletteSize + std::ceil(width * height * (0.5));
+    int padding = (4 - (static_cast<int>(std::ceil(width * 0.5)) % 4)) % 4;  // DWORD is 4 bytes.
 
     unsigned char fileHeader[fileHeaderSize];
 
@@ -79,7 +80,7 @@ void Export(const Vector<Vector<Pixel>>& matrix, const std::string& _path, const
         palette[4 * i + 2] = _colors[i].r;
         palette[4 * i + 3] = 0;
     }
-    for (int i = 20; i != 64; ++i) {  // define 0 as the default value
+    for (int i = 20; i != 64; ++i) {
         palette[i] = 0;
     }
 
@@ -150,7 +151,7 @@ void Export(const Vector<Vector<Pixel>>& matrix, const std::string& _path, const
             }
             f.write(reinterpret_cast<char*>(&pixel), 1);
         }
-        f.write("\0\0\0", (4 - ((int)std::ceil(width * 0.5) % 4)) % 4);
+        f.write("\0\0\0", padding);
     }
 
     f.close();
