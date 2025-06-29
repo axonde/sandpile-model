@@ -34,6 +34,7 @@
 # Project locals
 build/
 tests/
+rendered-imgs/
 
 # IDE
 .vscode/
